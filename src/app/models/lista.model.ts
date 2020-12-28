@@ -15,6 +15,6 @@ export class Lista {
         this.terminada = false;
         this.items = [];
 
-        this.id = new Date().getDate();
+        this.id = Date.now();
     }
 }

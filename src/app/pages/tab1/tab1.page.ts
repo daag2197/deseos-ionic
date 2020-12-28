@@ -15,13 +15,12 @@ export class Tab1Page {
   }
 
   async agregarLista(){
-    // this.router.navigateByUrl('/tabs/tab1/agregar');
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Nueva Lista',
       inputs: [
         {
-          name: 'Titulo',
+          name: 'titulo',
           type: 'text',
           placeholder: 'Nombre de la lista'
         }
@@ -34,14 +33,18 @@ export class Tab1Page {
         }
       }, {
         text: 'Guardar',
-        role: 'save',
-        handler: () => {
-          console.log('Guardar');
+        handler: ( data ) => {
+          if ( data.titulo.length === 0 ){
+            return;
+          }
+          const id = this.deseosService.CrearLista( data.titulo );
+          this.router.navigateByUrl(`/tabs/tab1/agregar/${id}`);
         }
       }]
     });
 
     await alert.present();
   }
+
 
 }
